@@ -17,6 +17,16 @@ public class MainNoGI {
     private static int x;
     private static int y;
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     public static void main( String[] args ) throws Exception {
 
         Thread t = Thread.currentThread();
@@ -29,7 +39,7 @@ public class MainNoGI {
         String name = in.next();
         t.sleep( 700 );
         System.out.println();
-        System.out.println( "Hi " + name + ", and welcome to Tic-Tac-Toe!" );
+        System.out.println( "Hi " + ANSI_GREEN + name + ANSI_RESET + ", and welcome to" + ANSI_BLUE + " Tic-Tac-Toe" + ANSI_RESET +"!");
         System.out.println();
         t.sleep( 1500 );
         System.out.println( "Press 1 if you want to play with the x item or press 2 if you want to play with the o item" );
