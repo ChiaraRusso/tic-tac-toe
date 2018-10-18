@@ -17,15 +17,15 @@ public class MainNoGI {
     private static int x;
     private static int y;
 
-    public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+
+    private static int round = 1;
 
     public static void main( String[] args ) throws Exception {
 
@@ -39,16 +39,20 @@ public class MainNoGI {
         String name = in.next();
         t.sleep( 700 );
         System.out.println();
-        System.out.println( "Hi " + ANSI_GREEN + name + ANSI_RESET + ", and welcome to" + ANSI_BLUE + " Tic-Tac-Toe" + ANSI_RESET +"!");
+        System.out.println( "Hi " + ANSI_GREEN + name + ANSI_RESET + ", and welcome to" + ANSI_BLUE + " Tic-Tac-Toe" + ANSI_RESET + "!" );
         System.out.println();
         t.sleep( 1500 );
-        System.out.println( "Press 1 if you want to play with the x item or press 2 if you want to play with the o item" );
+        System.out.println( "Press " + ANSI_PURPLE + "1" + ANSI_RESET + " if you want to play with the " + ANSI_PURPLE + "x " +
+                ANSI_RESET +
+                "or press" + ANSI_CYAN + " 2" + ANSI_RESET + " if you want to play with the" + ANSI_CYAN + " o." + ANSI_RESET );
         player = in.next();
         while ( !checkValidPlayerOption( player ) ) {
             System.out.println();
             System.out.println( "Uh-oh! The number you insert is not valid." );
             System.out.println();
-            System.out.println( "Press 1 if you want to play with the x item or press 2 if you want to play with the o item" );
+            System.out.println( "Press " + ANSI_PURPLE + "1" + ANSI_RESET + " if you want to play with the " + ANSI_PURPLE + "x " +
+                    ANSI_RESET +
+                    "or press" + ANSI_CYAN + " 2" + ANSI_RESET + " if you want to play with the" + ANSI_CYAN + "o" + ANSI_RESET );
             player = in.next();
         }
         if ( player.equals( "1" ) ) {
@@ -64,12 +68,14 @@ public class MainNoGI {
         System.out.println();
         System.out.println();
         t.sleep( 950 );
-        System.out.println( "~~~~~~~ Ready to play? ~~~~~~~" );
+        System.out.println( ANSI_CYAN + "~~~~~~~ Ready to play? ~~~~~~~" + ANSI_RESET );
         System.out.println();
         t.sleep( 2000 );
 
         while ( controller.arePositionsAvailable() ) {
 
+            System.out.println( ANSI_PURPLE + "Round: " + round + ANSI_RESET );
+            round += 1;
             System.out.println( "Here the positions available: ( X - Y )" );
             System.out.println();
             t.sleep( 500 );
@@ -94,12 +100,13 @@ public class MainNoGI {
                 controller.printMatrix();
 
                 if ( !controller.arePositionsAvailable() ) {
-                    System.out.println( "I guess this game ended in a draw!" );
+                   System.out.println( ANSI_PURPLE + "I guess this game ended in a draw!" + ANSI_RESET );
                     return;
                 }
 
                 if ( controller.win( player ) ) {
-                    System.out.println( "Congratulation " + name + ", you won!" );
+                    System.out.println( ANSI_GREEN + "Congratulation " + ANSI_YELLOW + name + ANSI_RESET + ANSI_GREEN + ", you won!" +
+                            ANSI_RESET );
                     return;
                 }
             } else {
@@ -119,7 +126,8 @@ public class MainNoGI {
                     }
 
                     if ( controller.win( player ) ) {
-                        System.out.println( "Congratulation " + name + ", you won!" );
+                        System.out.println( ANSI_GREEN + "Congratulation " + ANSI_YELLOW + name + ANSI_RESET + ANSI_GREEN + ", you won!" +
+                                ANSI_RESET );
                         return;
                     }
                 }
@@ -129,19 +137,19 @@ public class MainNoGI {
 
             System.out.println();
             t.sleep( 500 );
-            System.out.println( "--- opponent's move ---" );
+            System.out.println( ANSI_YELLOW + "--- opponent's move ---" + ANSI_RESET );
             System.out.println();
             t.sleep( 1500 );
             aiController.generateIAPosition( controller.getField(), opponent, player );
             if ( controller.win( opponent ) ) {
                 controller.printMatrix();
-                System.out.println( "Uh-oh.. You lost :(" );
+                System.out.println( ANSI_RED + "Uh-oh.. You lost :(" + ANSI_RESET );
                 return;
             }
             controller.printMatrix();
         }
 
-        System.out.println( "I guess this game ended in a draw!" );
+        System.out.println( ANSI_PURPLE + "I guess this game ended in a draw!" + ANSI_RESET );
     }
 
     public static Boolean checkValidCoordinate( int x ) {
