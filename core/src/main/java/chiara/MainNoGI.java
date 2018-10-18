@@ -1,7 +1,6 @@
 package chiara;
 
 
-
 import chiara.controller.AIController;
 import chiara.controller.Controller;
 
@@ -59,8 +58,6 @@ public class MainNoGI {
         System.out.println();
         t.sleep( 2000 );
 
-        //TODO quando le posizioni libere sono finite, il gioco termina
-
         while ( controller.arePositionsAvailable() ) {
 
             System.out.println( "Here the positions available: ( X - Y )" );
@@ -86,6 +83,11 @@ public class MainNoGI {
                 t.sleep( 700 );
                 controller.printMatrix();
 
+                if ( !controller.arePositionsAvailable() ) {
+                    System.out.println( "I guess this game ended in a draw!" );
+                    return;
+                }
+
                 if ( controller.win( player ) ) {
                     System.out.println( "Congratulation " + name + ", you won!" );
                     return;
@@ -101,6 +103,11 @@ public class MainNoGI {
                     System.out.println( "Enter your Y position:" );
                     y = in.nextInt();
 
+                    if ( !controller.arePositionsAvailable() ) {
+                        System.out.println( "I guess this game ended in a draw!" );
+                        return;
+                    }
+
                     if ( controller.win( player ) ) {
                         System.out.println( "Congratulation " + name + ", you won!" );
                         return;
@@ -115,7 +122,7 @@ public class MainNoGI {
             System.out.println( "--- opponent's move ---" );
             System.out.println();
             t.sleep( 1500 );
-            aiController.generateIAPosition( controller.getField(),opponent,player );
+            aiController.generateIAPosition( controller.getField(), opponent, player );
             if ( controller.win( opponent ) ) {
                 controller.printMatrix();
                 System.out.println( "Uh-oh.. You lost :(" );

@@ -19,14 +19,15 @@ public class AIController {
 
     public void generateIAPosition( String m[][], String opponent, String player ) {
         //TODO
+        //TODO manca il controllo X_X bloccare nel centro
         if ( horizontalCheck( m, opponent ) ||
                 verticalCheck( m, opponent ) ||
                 horizontalBlock( m, player, opponent ) ||
                 verticalBlock( m, player, opponent ) ||
                 middleCheck( m, opponent ) ||
-                inverseMiddleCheck( m, opponent) ||
-                middleBlock( m,player,opponent ) ||
-                inverseMiddleBlock( m,player,opponent ))
+                inverseMiddleCheck( m, opponent ) ||
+                middleBlock( m, player, opponent ) ||
+                inverseMiddleBlock( m, player, opponent ) )
             return;
         else
             generateOpponentPosition( m, opponent );
@@ -39,6 +40,8 @@ public class AIController {
                 if ( m[ i ][ j + 1 ].equals( p ) ) {
                     if ( m[ i ][ j + 2 ].equals( " " ) ) {
                         m[ i ][ j + 2 ] = p;
+                        System.out.println( "horizontalCheck" );
+                        System.out.println( "opponent: " + i + "-" + j + 2 );
                         return true;
                     } else
                         j = 0;
@@ -55,6 +58,8 @@ public class AIController {
                 if ( m[ i + 1 ][ j ].equals( p ) ) {
                     if ( m[ i + 2 ][ j ].equals( " " ) ) {
                         m[ i + 2 ][ j ] = p;
+                        System.out.println( "verticalCheck" );
+                        System.out.println( "opponent: " + i + 2 + "-" + j );
                         return true;
                     } else
                         i = 0;
@@ -73,6 +78,8 @@ public class AIController {
                         c++;
                         if ( c == DIM - 1 ) {
                             m[ DIM - 1 ][ DIM - 1 ] = p;
+                            System.out.println( "middleCheck" );
+                            System.out.println( "opponent: 2-2" );
                             return true;
                         }
                     }
@@ -91,6 +98,8 @@ public class AIController {
                         c++;
                         if ( c == DIM - 1 ) {
                             m[ 0 ][ 0 ] = p;
+                            System.out.println( "inverseMiddleCheck" );
+                            System.out.println( "opponent: 0-0" );
                             return true;
                         }
                     }
@@ -99,7 +108,7 @@ public class AIController {
         }
         return false;
     }
-
+    //TODO non funziona da dx verso sx
     public Boolean horizontalBlock( String m[][], String p, String o ) {
         int j = 0;
         for ( int i = 0; i < DIM; i++ ) {
@@ -107,6 +116,8 @@ public class AIController {
                 if ( m[ i ][ j + 1 ].equals( p ) ) {
                     if ( m[ i ][ j + 2 ].equals( " " ) ) {
                         m[ i ][ j + 2 ] = o;
+                        System.out.println( "horizontalBlock" );
+                        System.out.println( "opponent: " + i + "-" + j + 2 );
                         return true;
                     } else
                         j = 0;
@@ -123,6 +134,8 @@ public class AIController {
                 if ( m[ i + 1 ][ j ].equals( p ) ) {
                     if ( m[ i + 2 ][ j ].equals( " " ) ) {
                         m[ i + 2 ][ j ] = o;
+                        System.out.println( "verticalBlock" );
+                        System.out.println( "opponent: " + i + 2 + "-" + j );
                         return true;
                     } else
                         i = 0;
@@ -140,8 +153,13 @@ public class AIController {
                     if ( m[ i ][ j ].equals( p ) ) {
                         c++;
                         if ( c == DIM - 1 ) {
-                            m[ DIM - 1 ][ DIM - 1 ] = o;
-                            return true;
+                            if ( m[ DIM - 1 ][ DIM - 1 ].equals( " " ) ) {
+                                m[ DIM - 1 ][ DIM - 1 ] = o;
+                                System.out.println( "middleBlock" );
+                                System.out.println( "opponent: 2-2" );
+                                return true;
+                            }
+                            return false;
                         }
                     }
                 }
@@ -158,8 +176,13 @@ public class AIController {
                     if ( m[ i ][ j ].equals( p ) ) {
                         c++;
                         if ( c == DIM - 1 ) {
-                            m[ 2 ][ 0 ] = o;
-                            return true;
+                            if ( m[ 2 ][ 0 ].equals( " " ) ) {
+                                m[ 2 ][ 0 ] = o;
+                                System.out.println( "inverseMiddleBlock" );
+                                System.out.println( "opponent: 2-0" );
+                                return true;
+                            }
+                            return false;
                         }
                     }
                 }
