@@ -1,8 +1,9 @@
-package chiara.main.java;
+package chiara;
 
 
-import chiara.main.java.controller.AIController;
-import chiara.main.java.controller.Controller;
+
+import chiara.controller.AIController;
+import chiara.controller.Controller;
 
 import java.util.Scanner;
 

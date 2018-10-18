@@ -1,4 +1,4 @@
-package chiara.main.java.controller;
+package chiara.controller;
 
 
 public class Controller {
