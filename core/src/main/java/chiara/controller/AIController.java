@@ -27,7 +27,11 @@ public class AIController {
                 middleCheck( m, opponent ) ||
                 inverseMiddleCheck( m, opponent ) ||
                 middleBlock( m, player, opponent ) ||
-                inverseMiddleBlock( m, player, opponent ) )
+                inverseMiddleBlock( m, player, opponent ) ||
+                betweenHorizontalCheck( m, opponent ) ||
+                betweenHorizontalBlock( m, player, opponent ) ||
+                betweenVerticalCheck( m, opponent ) ||
+                betweenVerticalBlock( m, player, opponent ) )
             return;
         else
             generateOpponentPosition( m, opponent );
@@ -108,6 +112,79 @@ public class AIController {
         }
         return false;
     }
+
+    public Boolean betweenHorizontalCheck( String m[][], String p ) {
+        int j = 0;
+        for ( int i = 0; i < DIM; i++ ) {
+            if ( m[ i ][ j ].equals( p ) ) {
+                if ( m[ i ][ j + 1 ].equals( " " ) ) {
+                    if ( m[ i ][ j + 2 ].equals( p ) ) {
+                        m[ i ][ j + 1 ] = p;
+                        System.out.println( "betweenHorizontalCheck" );
+                        System.out.println( "opponent: " + i + "-" + j + 1 );
+                        return true;
+                    } else
+                        j = 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    public Boolean betweenVerticalCheck( String m[][], String p ) {
+        int i = 0;
+        for ( int j = 0; j < DIM; j++ ) {
+            if ( m[ i ][ j ].equals( p ) ) {
+                if ( m[ i + 1 ][ j ].equals( " " ) ) {
+                    if ( m[ i + 2 ][ j ].equals( p ) ) {
+                        m[ i + 1 ][ j ] = p;
+                        System.out.println( "betweenVerticalCheck" );
+                        System.out.println( "opponent: " + i + 2 + "-" + j );
+                        return true;
+                    } else
+                        i = 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    public Boolean betweenHorizontalBlock( String m[][], String p, String o ) {
+        int j = 0;
+        for ( int i = 0; i < DIM; i++ ) {
+            if ( m[ i ][ j ].equals( p ) ) {
+                if ( m[ i ][ j + 1 ].equals( " " ) ) {
+                    if ( m[ i ][ j + 2 ].equals( p ) ) {
+                        m[ i ][ j + 1 ] = o;
+                        System.out.println( "betweenHorizontalBlock" );
+                        System.out.println( "opponent: " + i + "-" + j + 1 );
+                        return true;
+                    } else
+                        j = 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    public Boolean betweenVerticalBlock( String m[][], String p, String o ) {
+        int i = 0;
+        for ( int j = 0; j < DIM; j++ ) {
+            if ( m[ i ][ j ].equals( p ) ) {
+                if ( m[ i + 1 ][ j ].equals( " " ) ) {
+                    if ( m[ i + 2 ][ j ].equals( p ) ) {
+                        m[ i + 1 ][ j ] = o;
+                        System.out.println( "betweenVerticalBlock" );
+                        System.out.println( "opponent: " + i + 2 + "-" + j );
+                        return true;
+                    } else
+                        i = 0;
+                }
+            }
+        }
+        return false;
+    }
+
     //TODO non funziona da dx verso sx
     public Boolean horizontalBlock( String m[][], String p, String o ) {
         int j = 0;
