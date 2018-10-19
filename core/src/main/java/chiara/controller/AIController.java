@@ -19,18 +19,18 @@ public class AIController {
 
     public void generateIAPosition( String m[][], String opponent, String player ) {
         //TODO
-        //TODO manca il controllo X_X bloccare nel centro
+        //TODO
         if ( horizontalCheck( m, opponent ) ||
                 verticalCheck( m, opponent ) ||
-                horizontalBlock( m, player, opponent ) ||
-                verticalBlock( m, player, opponent ) ||
                 middleCheck( m, opponent ) ||
                 inverseMiddleCheck( m, opponent ) ||
+                betweenVerticalCheck( m, opponent ) ||
+                betweenHorizontalCheck( m, opponent ) ||
+                horizontalBlock( m, player, opponent ) ||
+                verticalBlock( m, player, opponent ) ||
                 middleBlock( m, player, opponent ) ||
                 inverseMiddleBlock( m, player, opponent ) ||
-                betweenHorizontalCheck( m, opponent ) ||
                 betweenHorizontalBlock( m, player, opponent ) ||
-                betweenVerticalCheck( m, opponent ) ||
                 betweenVerticalBlock( m, player, opponent ) )
             return;
         else
@@ -44,8 +44,8 @@ public class AIController {
                 if ( m[ i ][ j + 1 ].equals( p ) ) {
                     if ( m[ i ][ j + 2 ].equals( " " ) ) {
                         m[ i ][ j + 2 ] = p;
-                        System.out.println( "horizontalCheck" );
-                        System.out.println( "opponent: " + i + "-" + j + 2 );
+//                        System.out.println( "horizontalCheck" );
+//                        System.out.println( "opponent: " + i + "-" + j + 2 );
                         return true;
                     } else
                         j = 0;
@@ -62,8 +62,8 @@ public class AIController {
                 if ( m[ i + 1 ][ j ].equals( p ) ) {
                     if ( m[ i + 2 ][ j ].equals( " " ) ) {
                         m[ i + 2 ][ j ] = p;
-                        System.out.println( "verticalCheck" );
-                        System.out.println( "opponent: " + i + 2 + "-" + j );
+//                        System.out.println( "verticalCheck" );
+//                        System.out.println( "opponent: " + i + 2 + "-" + j );
                         return true;
                     } else
                         i = 0;
@@ -82,8 +82,8 @@ public class AIController {
                         c++;
                         if ( c == DIM - 1 ) {
                             m[ DIM - 1 ][ DIM - 1 ] = p;
-                            System.out.println( "middleCheck" );
-                            System.out.println( "opponent: 2-2" );
+//                            System.out.println( "middleCheck" );
+//                            System.out.println( "opponent: 2-2" );
                             return true;
                         }
                     }
@@ -102,8 +102,8 @@ public class AIController {
                         c++;
                         if ( c == DIM - 1 ) {
                             m[ 0 ][ 0 ] = p;
-                            System.out.println( "inverseMiddleCheck" );
-                            System.out.println( "opponent: 0-0" );
+//                            System.out.println( "inverseMiddleCheck" );
+//                            System.out.println( "opponent: 0-0" );
                             return true;
                         }
                     }
@@ -120,8 +120,8 @@ public class AIController {
                 if ( m[ i ][ j + 1 ].equals( " " ) ) {
                     if ( m[ i ][ j + 2 ].equals( p ) ) {
                         m[ i ][ j + 1 ] = p;
-                        System.out.println( "betweenHorizontalCheck" );
-                        System.out.println( "opponent: " + i + "-" + j + 1 );
+//                        System.out.println( "betweenHorizontalCheck" );
+//                        System.out.println( "opponent: " + i + "-" + j + 1 );
                         return true;
                     } else
                         j = 0;
@@ -138,8 +138,8 @@ public class AIController {
                 if ( m[ i + 1 ][ j ].equals( " " ) ) {
                     if ( m[ i + 2 ][ j ].equals( p ) ) {
                         m[ i + 1 ][ j ] = p;
-                        System.out.println( "betweenVerticalCheck" );
-                        System.out.println( "opponent: " + i + 2 + "-" + j );
+//                        System.out.println( "betweenVerticalCheck" );
+//                        System.out.println( "opponent: " + i + 2 + "-" + j );
                         return true;
                     } else
                         i = 0;
@@ -156,8 +156,8 @@ public class AIController {
                 if ( m[ i ][ j + 1 ].equals( " " ) ) {
                     if ( m[ i ][ j + 2 ].equals( p ) ) {
                         m[ i ][ j + 1 ] = o;
-                        System.out.println( "betweenHorizontalBlock" );
-                        System.out.println( "opponent: " + i + "-" + j + 1 );
+//                        System.out.println( "betweenHorizontalBlock" );
+//                        System.out.println( "opponent: " + i + "-" + j + 1 );
                         return true;
                     } else
                         j = 0;
@@ -174,8 +174,8 @@ public class AIController {
                 if ( m[ i + 1 ][ j ].equals( " " ) ) {
                     if ( m[ i + 2 ][ j ].equals( p ) ) {
                         m[ i + 1 ][ j ] = o;
-                        System.out.println( "betweenVerticalBlock" );
-                        System.out.println( "opponent: " + i + 2 + "-" + j );
+//                        System.out.println( "betweenVerticalBlock" );
+//                        System.out.println( "opponent: " + i + 2 + "-" + j );
                         return true;
                     } else
                         i = 0;
@@ -193,8 +193,8 @@ public class AIController {
                 if ( m[ i ][ j + 1 ].equals( p ) ) {
                     if ( m[ i ][ j + 2 ].equals( " " ) ) {
                         m[ i ][ j + 2 ] = o;
-                        System.out.println( "horizontalBlock" );
-                        System.out.println( "opponent: " + i + "-" + j + 2 );
+//                        System.out.println( "horizontalBlock" );
+//                        System.out.println( "opponent: " + i + "-" + j + 2 );
                         return true;
                     } else
                         j = 0;
@@ -211,8 +211,8 @@ public class AIController {
                 if ( m[ i + 1 ][ j ].equals( p ) ) {
                     if ( m[ i + 2 ][ j ].equals( " " ) ) {
                         m[ i + 2 ][ j ] = o;
-                        System.out.println( "verticalBlock" );
-                        System.out.println( "opponent: " + i + 2 + "-" + j );
+//                        System.out.println( "verticalBlock" );
+//                        System.out.println( "opponent: " + i + 2 + "-" + j );
                         return true;
                     } else
                         i = 0;
@@ -232,8 +232,8 @@ public class AIController {
                         if ( c == DIM - 1 ) {
                             if ( m[ DIM - 1 ][ DIM - 1 ].equals( " " ) ) {
                                 m[ DIM - 1 ][ DIM - 1 ] = o;
-                                System.out.println( "middleBlock" );
-                                System.out.println( "opponent: 2-2" );
+//                                System.out.println( "middleBlock" );
+//                                System.out.println( "opponent: 2-2" );
                                 return true;
                             }
                             return false;
@@ -244,7 +244,7 @@ public class AIController {
         }
         return false;
     }
-
+//TODO non funziona al contrario, pos (2-0) (1-1)
     public Boolean inverseMiddleBlock( String m[][], String p, String o ) {
         int c = 0;
         for ( int i = 0; i < DIM; i++ ) {
@@ -255,8 +255,8 @@ public class AIController {
                         if ( c == DIM - 1 ) {
                             if ( m[ 2 ][ 0 ].equals( " " ) ) {
                                 m[ 2 ][ 0 ] = o;
-                                System.out.println( "inverseMiddleBlock" );
-                                System.out.println( "opponent: 2-0" );
+//                                System.out.println( "inverseMiddleBlock" );
+//                                System.out.println( "opponent: 2-0" );
                                 return true;
                             }
                             return false;

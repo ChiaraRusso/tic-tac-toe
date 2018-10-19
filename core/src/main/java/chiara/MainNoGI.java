@@ -44,7 +44,7 @@ public class MainNoGI {
         t.sleep( 1500 );
         System.out.println( "Press " + ANSI_PURPLE + "1" + ANSI_RESET + " if you want to play with the " + ANSI_PURPLE + "x " +
                 ANSI_RESET +
-                "or press" + ANSI_CYAN + " 2" + ANSI_RESET + " if you want to play with the" + ANSI_CYAN + " o." + ANSI_RESET );
+                "or press" + ANSI_CYAN + " 2" + ANSI_RESET + " if you want to play with the" + ANSI_CYAN + " o" + ANSI_RESET + "." );
         player = in.next();
         while ( !checkValidPlayerOption( player ) ) {
             System.out.println();
@@ -52,7 +52,7 @@ public class MainNoGI {
             System.out.println();
             System.out.println( "Press " + ANSI_PURPLE + "1" + ANSI_RESET + " if you want to play with the " + ANSI_PURPLE + "x " +
                     ANSI_RESET +
-                    "or press" + ANSI_CYAN + " 2" + ANSI_RESET + " if you want to play with the" + ANSI_CYAN + "o" + ANSI_RESET );
+                    "or press" + ANSI_CYAN + " 2" + ANSI_RESET + " if you want to play with the" + ANSI_CYAN + "o" + ANSI_RESET + "." );
             player = in.next();
         }
         if ( player.equals( "1" ) ) {
@@ -63,8 +63,9 @@ public class MainNoGI {
             opponent = "x";
         }
         t.sleep( 500 );
-        System.out.println( "Congratulation, you picked the " + player + "!" +
-                " Your opponent will play with the " + opponent );
+        System.out.println();
+        System.out.println( "Congratulation, you picked the " + ANSI_GREEN + player + ANSI_RESET + "!" +
+                " Your opponent will play with the " + ANSI_RED + opponent + ANSI_RESET + "." );
         System.out.println();
         System.out.println();
         t.sleep( 950 );
@@ -100,7 +101,7 @@ public class MainNoGI {
                 controller.printMatrix();
 
                 if ( !controller.arePositionsAvailable() ) {
-                   System.out.println( ANSI_PURPLE + "I guess this game ended in a draw!" + ANSI_RESET );
+                    System.out.println( ANSI_PURPLE + "I guess this game ended in a draw!" + ANSI_RESET );
                     return;
                 }
 
@@ -137,6 +138,10 @@ public class MainNoGI {
 
             System.out.println();
             t.sleep( 500 );
+            if ( !controller.arePositionsAvailable() ) {
+                System.out.println( ANSI_PURPLE + "I guess this game ended in a draw!" + ANSI_RESET );
+                return;
+            }
             System.out.println( ANSI_YELLOW + "--- opponent's move ---" + ANSI_RESET );
             System.out.println();
             t.sleep( 1500 );
